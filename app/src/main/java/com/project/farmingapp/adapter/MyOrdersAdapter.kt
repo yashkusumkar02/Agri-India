@@ -1,5 +1,6 @@
 package com.project.farmingapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -40,6 +41,7 @@ class MyOrdersAdapter(
         return allData.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyOrdersViewHolder, position: Int) {
         val myOrder = allData.entries.toTypedArray()[position].value as HashMap<String, Object>
         val viewModel = EcommViewModel()

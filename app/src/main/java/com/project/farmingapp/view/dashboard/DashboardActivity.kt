@@ -121,6 +121,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
     private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -139,7 +140,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         viewModel2 = ViewModelProviders.of(this)
             .get<UserProfilePostsViewModel>(UserProfilePostsViewModel::class.java)
-//        viewModel2.getAllPosts(firebaseAuth.currentUser!!.email.toString())
+        viewModel2.getAllPosts(firebaseAuth.currentUser!!.email.toString())
 
         mGoogleApiClient = GoogleApiClient.Builder(this)
             .addApi(LocationServices.API)
@@ -159,10 +160,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             Intent(this, IntroActivity::class.java).also {
                 startActivity(it)
             }
-//            val editor = sharedPreferences.edit()
-//            firstTime = false;
-//            editor.putBoolean("firstTime", firstTime!!)
-//            editor.apply()
+            val editor = sharedPreferences.edit()
+            firstTime = false;
+            editor.putBoolean("firstTime", firstTime!!)
+            editor.apply()
             finish()
             return
         } else{
@@ -281,7 +282,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             val city = it.get("city")
             userName = it.get("name").toString()
 
-//            val allPosts = viewModel2.liveData3.value as ArrayList<DocumentSnapshot>
+            val allPosts = viewModel2.liveData3.value as ArrayList<DocumentSnapshot>
 
             if(city == null){
                 something.cityTextNavHeader.text ="City: "
@@ -445,7 +446,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
         } else {
             getLocation();
-//            buildGoogleApiClient()
+            buildGoogleApiClient()
         }
     }
 
@@ -470,9 +471,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun getLocation() {
         mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-        if (mLocation == null) {
-            startLocationUpdates();
-        }
+        if (mLocation == null) startLocationUpdates()
         if (mLocation != null) {
             Toast.makeText(this, "Lat: " + mLocation!!.latitude.toString(), Toast.LENGTH_SHORT).show()
             Toast.makeText(this, "Long: " + mLocation!!.longitude.toString(), Toast.LENGTH_SHORT).show()
@@ -502,7 +501,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this)
     }
-    override fun onLocationChanged(p0: Location?) {
+    override fun onLocationChanged(p0: Location) {
 //        automatedClick()
     }
 
@@ -526,11 +525,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val dialog = android.app.AlertDialog.Builder(this)
         dialog.setTitle("Enable Location")
             .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use this app!")
-            .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
+            .setPositiveButton("Location Settings") { _, paramInt ->
                 val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(myIntent)
             }
-            .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> }
+            .setNegativeButton("Cancel") { _, paramInt -> }
         dialog.show()
     }
 
@@ -580,13 +579,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         mGoogleApiClient?.connect()
         Handler().postDelayed({
             automatedClick()
-        }, 1000)
+        },1000)
 
     }
 
     override fun onStop() {
         super.onStop()
-        if (mGoogleApiClient!!.isConnected()) {
+        if (mGoogleApiClient!!.isConnected) {
             mGoogleApiClient!!.disconnect()
         }
     }

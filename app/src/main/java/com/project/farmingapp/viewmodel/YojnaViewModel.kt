@@ -21,7 +21,7 @@ class YojnaViewModel: ViewModel() {
         firebaseDb = FirebaseFirestore.getInstance()
 
 
-        firebaseDb.collection("yojnas").document("${name}")
+        firebaseDb.collection("yojnas").document(name)
             .get()
             .addOnSuccessListener {
                 msg.value = it.data as HashMap<String, Any>?
@@ -39,7 +39,7 @@ class YojnaViewModel: ViewModel() {
             firebaseDb.collection(name).get().addOnSuccessListener {
 //            var message3 = MutableLiveData<DocumentSnapshot>()
 
-                message3.value = it.documents
+//                message3.value = it.documents
                 Log.d("I'm called4", "Yes")
 //            Log.d("All articles", it.documents[1].data.toString())
             }

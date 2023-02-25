@@ -1,5 +1,6 @@
 package com.project.farmingapp.viewmodel
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -34,7 +35,7 @@ class ArticleViewModel : ViewModel() {
         firebaseDb = FirebaseFirestore.getInstance()
 
         Log.d("ArticleRepo1", "Ss")
-        firebaseDb.collection("article_fruits").document("${name}")
+        firebaseDb.collection("article_fruits").document(name)
             .get()
             .addOnSuccessListener {
                 message1.value = it.data as HashMap<String, Any>?
@@ -45,16 +46,17 @@ class ArticleViewModel : ViewModel() {
             }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun getAllArticles(name: String){
 
-        if (message3.value.isNullOrEmpty()){
+        if (message1.value.isNullOrEmpty()){
             firebaseDb = FirebaseFirestore.getInstance()
             firebaseDb.collection(name).get().addOnSuccessListener {
-//            var message3 = MutableLiveData<DocumentSnapshot>()
+            var message1 = MutableLiveData<DocumentSnapshot>()
 
-                message3.value = it.documents
+//                message3.value = it.documents
                 Log.d("I'm called4", "Yes")
-//            Log.d("All articles", it.documents[1].data.toString())
+//            Lo.d("All articles", it.documents[2].data.toString())
             }
         }
 

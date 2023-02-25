@@ -51,8 +51,8 @@ class EcommerceFragment : Fragment(), CellClickListener {
             viewmodel = ViewModelProviders.of(requireActivity())
                 .get<EcommViewModel>(EcommViewModel::class.java)
 
-//            viewmodel = ViewModelProviders.of(requireActivity())
-//                .get<EcommViewModel>(EcommViewModel::class.java)
+            viewmodel = ViewModelProviders.of(requireActivity())
+                .get<EcommViewModel>(EcommViewModel::class.java)
 
             viewmodel.loadAllEcommItems()
         }
@@ -147,14 +147,14 @@ class EcommerceFragment : Fragment(), CellClickListener {
         ecommerceItemFragment = EcommerceItemFragment()
         val bundle = Bundle()
         bundle.putString("name", name)
-        ecommerceItemFragment.setArguments(bundle)
+        ecommerceItemFragment.arguments = bundle
 
         val transaction = activity!!.supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame_layout, ecommerceItemFragment, name)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .setReorderingAllowed(true)
-            .addToBackStack("ecommItem")
+            .addToBackStack("commItem")
             .commit()
 
     }

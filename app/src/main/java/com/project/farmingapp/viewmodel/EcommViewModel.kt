@@ -29,32 +29,33 @@ class EcommViewModel : ViewModel() {
 
         firebaseFireStore!!.collection("products").get()
             .addOnSuccessListener {
-                Log.d("ecommviewmodel", it.documents[0].getString("title").toString())
+//                Log.d("discommode", it.documents[1].getString("title").toString())
                 ecommLiveData.value = it.documents
-                Log.d("ecommviewmodel", it.documents.toString())
+                Log.d("discommode", it.documents.toString())
 
             }
             .addOnFailureListener {
-                Log.d("ecommviewmodel", it.message)
+                it.message?.let { it1 -> Log.d("discommode", it1) }
             }
         return ecommLiveData
     }
 
-    fun loadSpecificTypeEcomItem(itemType: String) {
+    fun loadSpecificTypeEcomItem(itemType: String): MutableLiveData<List<DocumentSnapshot>> {
         firebaseFireStore = FirebaseFirestore.getInstance()
 
-        firebaseFireStore!!.collection("products")
+        firebaseFireStore.collection("products")
             .whereEqualTo("type", itemType)
             .get()
             .addOnSuccessListener {
-                Log.d("ecommviewmodel", it.documents[0].getString("title").toString())
+                Log.d("Ecommviewmodel", it.documents[0].getString("title").toString())
                 ecommLiveData.value = it.documents
-                Log.d("ecommviewmodel", it.documents.toString())
+                Log.d("discommode", it.documents.toString())
 
             }
             .addOnFailureListener {
-                Log.d("ecommviewmodel", it.message)
+                Log.d("discommode", it.message)
             }
+        return ecommLiveData
 
     }
 
@@ -65,11 +66,11 @@ class EcommViewModel : ViewModel() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     specificCategoryItems.value = it.result!!.documents
-                    Log.d("EcommViewModel", it.result!!.documents.toString())
+                    Log.d("Eco-mmViewModel", it.result!!.documents.toString())
                 }
             }
             .addOnFailureListener {
-                Log.e("EcommViewModel", "Error Loading Specific Category Items")
+                Log.e("Eco-mmViewModel", "Error Loading Specific Category Items")
             }
         return specificCategoryItems
     }
@@ -80,13 +81,13 @@ class EcommViewModel : ViewModel() {
             .get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Log.d("EcommViewModel", it.result!!.data.toString())
+                    Log.d("Eco-mmViewModel", it.result!!.data.toString())
                     specificItem.value = it.result
                 } else {
-                    Log.e("EcommViewModel", "Failed Getting Data")
+                    Log.e("Eco-mmViewModel", "Failed Getting Data")
                 }
             }.addOnFailureListener {
-                Log.e("EcommViewModel", "Failed Getting Data")
+                Log.e("Eco-mmViewModel", "Failed Getting Data")
             }
         return specificItem
     }

@@ -1,5 +1,6 @@
 package com.project.farmingapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,7 @@ class DashboardEcomItemAdapter(var context: Context,val allData: List<DocumentSn
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardEcomItemViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.single_dashboard_ecomm_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.single_dashboard_ecomm_item, parent, true)
         return DashboardEcomItemViewHolder(view)
     }
 
@@ -26,12 +27,13 @@ class DashboardEcomItemAdapter(var context: Context,val allData: List<DocumentSn
         return itemsToShow.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DashboardEcomItemViewHolder, position: Int) {
         val currentData = allData[itemsToShow[position]]
 
         holder.itemView.itemTitle.text = currentData.get("title").toString()
         holder.itemView.itemPrice.text = "\u20B9"  + currentData.get("price").toString()
-        val allImages = currentData.get("imageUrl") as ArrayList<String>
+        val allImages = currentData.get("imageUrl") as ArrayList<*>
         Glide.with(context).load(allImages[0]).into(holder.itemView.itemImage)
         holder.itemView.setOnClickListener {
             cellClickListener.onCellClickListener(currentData.id)

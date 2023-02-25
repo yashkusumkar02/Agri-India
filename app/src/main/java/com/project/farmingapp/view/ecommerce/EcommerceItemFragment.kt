@@ -61,7 +61,7 @@ class EcommerceItemFragment : Fragment(), CellClickListener {
         }
         viewmodel = ViewModelProviders.of(requireActivity())
             .get<EcommViewModel>(EcommViewModel::class.java)
-        Toast.makeText(activity!!.applicationContext, "Something" + tag, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity!!.applicationContext, "Something$tag", Toast.LENGTH_SHORT).show()
 
         realtimeDatabase = FirebaseDatabase.getInstance()
         firebaseAuth = FirebaseAuth.getInstance()
@@ -227,7 +227,7 @@ class EcommerceItemFragment : Fragment(), CellClickListener {
 
                 val allImages = specificData.get("imageUrl") as List<String>
                 for (a in allImages){
-                    posters.add(RemoteImage("${a}"))
+                    posters.add(RemoteImage(a))
                 }
                 poster_slider.setPosters(posters)
             }
@@ -243,9 +243,9 @@ class EcommerceItemFragment : Fragment(), CellClickListener {
             loadingText.visibility = View.GONE
             val realtimeRef = realtimeDatabase.getReference("${firebaseAuth.currentUser!!.uid}").child("cart").child("${currentItemId}")
 
-//            selectionAttribute!!.put("quantity", quantityCountEcomm.text.toString().toInt())
-//            selectionAttribute.put("basePrice", productPrice.text.toString().toInt())
-//            selectionAttribute.put("delCharge", deliverycost.text.toString().toInt())
+            selectionAttribute!!.put("quantity", quantityCountEcomm.text.toString().toInt())
+            selectionAttribute.put("basePrice", productPrice.text.toString().toInt())
+            selectionAttribute.put("delCharge", deliverycost.text.toString().toInt())
 
             val currentDateTime = sdf.format(Date())
             realtimeRef.setValue(CartItem(quantityCountEcomm.text.toString().toInt(), currentDateTime.toString()))
@@ -265,17 +265,17 @@ class EcommerceItemFragment : Fragment(), CellClickListener {
         }
 
         buynow.setOnClickListener {
-//            var product_id = ArrayList<String>()
-//            var item_cost=ArrayList<Int>()
-//            var item_qty=ArrayList<Int>()
+            var product_id = ArrayList<String>()
+            var item_cost=ArrayList<Int>()
+            var item_qty=ArrayList<Int>()
             val productPrice = productPrice.text.toString().split("₹") as ArrayList<String>
 
 
-//            var totalPrice = quantityCountEcomm.text.toString().toInt()*productPrice[1].toString().toInt() + deliverycost.text.toString().toInt()
+            var totalPrice = quantityCountEcomm.text.toString().toInt()*productPrice[1].toString().toInt() + deliverycost.text.toString().toInt()
 
-//            product_id.add(currentItemId as String)
-//            item_cost.add(totalPrice)
-//            item_qty.add(quantityCountEcomm.text.toString().toInt())
+            product_id.add(currentItemId as String)
+            item_cost.add(totalPrice)
+            item_qty.add(quantityCountEcomm.text.toString().toInt())
 
             Intent(activity!!.applicationContext, RazorPayActivity::class.java).also {
                 it.putExtra("productId",currentItemId.toString())

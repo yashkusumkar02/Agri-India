@@ -97,7 +97,7 @@ class dashboardFragment : Fragment(), CellClickListener {
                 windTextWeathFrag.text = "Wind: " + it!!.list[0].wind.speed.toString() + " km/hr"
                 weatherCityTitle.text = city.toString()
                 var iconcode = it!!.list[0].weather[0].icon
-                var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
+                var iconurl = " http://openweathermap.org/img/wn/" + iconcode + ".png";
                 Glide.with(activity!!.applicationContext).load(iconurl)
                     .into(weathIconImageWeathFrag)
             })

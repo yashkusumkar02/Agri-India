@@ -104,7 +104,7 @@ class ArticleListFragment : Fragment(), CellClickListener {
         fruitFragment = FruitsFragment()
         val bundle = Bundle()
         bundle.putString("name", name)
-        fruitFragment.setArguments(bundle)
+        fruitFragment.arguments = bundle
         val transaction = activity!!.supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame_layout, fruitFragment, name)

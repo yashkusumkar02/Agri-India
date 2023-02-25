@@ -16,13 +16,6 @@ public abstract class PaginationListener : RecyclerView.OnScrollListener() {
      */
     private val PAGE_SIZE = 10
 
-    /**
-     * Supporting only LinearLayoutManager for now.
-     */
-    open fun PaginationListener(layoutManager: LinearLayoutManager) {
-        this.layoutManager = layoutManager
-    }
-
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
         val visibleItemCount = layoutManager!!.childCount

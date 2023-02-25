@@ -1,5 +1,6 @@
 package com.project.farmingapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class EcommerceAdapter(val context: Context, val ecommtListData : List<DocumentS
         return ecommtListData.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: EcommerceAdapter.EcommercceViewModel, position: Int) {
         val currentList = ecommtListData[position]
         holder.itemView.ecommtitle.text = currentList.get("title").toString()

@@ -99,7 +99,7 @@ class YojnaListFragment : Fragment(), CellClickListener {
        yojnaFragment = YojnaFragment()
         val bundle = Bundle()
         bundle.putString("name", name)
-        yojnaFragment.setArguments(bundle)
+        yojnaFragment.arguments = bundle
         val transaction = activity!!.supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame_layout, yojnaFragment, name)

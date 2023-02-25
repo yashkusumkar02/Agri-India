@@ -1,5 +1,6 @@
 package com.project.farmingapp.view.ecommerce
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -86,7 +87,7 @@ class CartFragment : Fragment(), CartItemBuy {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val firebaseAuth = FirebaseAuth.getInstance()
         val cartRef =
-            firebaseDatabase.getReference("${firebaseAuth.currentUser!!.uid}").child("cart")
+            firebaseDatabase.getReference(firebaseAuth.currentUser!!.uid).child("cart")
 
         (activity as AppCompatActivity).supportActionBar?.title = "Cart"
         isOpened = true
@@ -96,6 +97,7 @@ class CartFragment : Fragment(), CartItemBuy {
                 TODO("Not yet implemented")
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
 

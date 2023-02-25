@@ -1,5 +1,6 @@
 package com.project.farmingapp.view.ecommerce
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -38,6 +39,7 @@ class RazorPayActivity : AppCompatActivity(), PaymentResultListener {
     var quantity: Int? = null
     var deliveryCost: Int? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_razor_pay)
@@ -62,12 +64,12 @@ class RazorPayActivity : AppCompatActivity(), PaymentResultListener {
             state = statePrePay.text.toString()
             pincode = pincodePrePay.text.toString()
             mobile = mobileNumberPrePay.text.toString()
-            if (name.isNullOrEmpty() ||
-                locality.isNullOrEmpty() ||
-                city.isNullOrEmpty() ||
-                state.isNullOrEmpty() ||
-                pincode.isNullOrEmpty() ||
-                mobile.isNullOrEmpty()
+            if (name.isEmpty() ||
+                locality.isEmpty() ||
+                city.isEmpty() ||
+                state.isEmpty() ||
+                pincode.isEmpty() ||
+                mobile.isEmpty()
             ) {
                 Toast.makeText(this, "Please Add all Fields", Toast.LENGTH_LONG).show()
             }
@@ -131,7 +133,7 @@ class RazorPayActivity : AppCompatActivity(), PaymentResultListener {
             realtimeDatabase = FirebaseDatabase.getInstance()
 
             var orderRef =
-                realtimeDatabase.getReference("${firebaseAuth.currentUser!!.uid}").child("orders")
+                realtimeDatabase.getReference(firebaseAuth.currentUser!!.uid).child("orders")
                     .child("${postId}")
             val currDate = System.currentTimeMillis()
 
@@ -145,9 +147,9 @@ class RazorPayActivity : AppCompatActivity(), PaymentResultListener {
             calendar.add(Calendar.DATE, randomDay[0])
             date1 = calendar.time
 
-//            calendar.timeInMillis
-//            Toast.makeText(this, randomDay[0].toString(), Toast.LENGTH_LONG).show()
-//            Toast.makeText(this, calendar.timeInMillis.toString(), Toast.LENGTH_LONG).show()
+            calendar.timeInMillis
+            Toast.makeText(this, randomDay[0].toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, calendar.timeInMillis.toString(), Toast.LENGTH_LONG).show()
 
             orderRef.setValue(
                 orders(

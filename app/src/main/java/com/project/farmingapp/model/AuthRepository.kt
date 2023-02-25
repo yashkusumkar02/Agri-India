@@ -27,15 +27,15 @@ class AuthRepository {
         val data2 = MutableLiveData<String>()
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
-                firebaseDb!!.collection("users").document("${email}")
+                firebaseDb.collection("users").document("${email}")
                     .set(otherData)
                     .addOnSuccessListener {
                         data.value = "Success"
                     }
-                    .addOnFailureListener { Exception ->
-                        {
+                    .addOnFailureListener {
+
                             data.value = "Failure"
-                        }
+
                     }
 
             } else if (it.isCanceled) {
@@ -58,7 +58,7 @@ class AuthRepository {
         firebaseAuth!!.signInWithCredential(credential)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    val userDocRef = firebaseDb!!.collection("users").document("${email}")
+                    val userDocRef = this.firebaseDb!!.collection("users").document("${email}")
 
                     userDocRef.get().addOnSuccessListener {
                         data.value = "Success"
@@ -66,20 +66,20 @@ class AuthRepository {
                             Log.d("User", "User Exists")
                         } else{
                             Log.d("User", "User Does not Exists")
-                            firebaseDb!!.collection("users").document("${email}")
+                            firebaseDb.collection("users").document("${email}")
                                 .set(otherData)
                                 .addOnSuccessListener {
                                     data.value = "Success"
                                 }
-                                .addOnFailureListener { Exception ->
-                                    {
+                                .addOnFailureListener {
+
                                         data.value = "Failure"
-                                    }
+
                                 }
                         }
                     }
 
-                    val user = firebaseAuth!!.currentUser
+                    val currentUser = this.firebaseAuth!!.currentUser
                 } else {
                     data.value = "Failure"
                 }

@@ -17,18 +17,18 @@ class ArticleRepository {
 
         firebaseDb = FirebaseFirestore.getInstance()
         Log.d("ArticleRepo1", "Ss")
-        firebaseDb.collection("article_fruits").document("${name}")
+        firebaseDb.collection("article_fruits").document(name)
             .get()
             .addOnSuccessListener {
-//                var ss = it.data
+                var ss = it.data
                 viewModel = ArticleViewModel()
 
 
-//                data.value = it.data as HashMap<String, Any>?
+                data.value = it.data as HashMap<String, Any>?
                 viewModel.updateArticle(it.data as HashMap<String, Any>)
 
 
-//                data.value = it.data as HashMap<String, Any>?
+                data.value = it.data as HashMap<String, Any>?
                 data2.value = "Success"
                 Log.d("ArticleRepo2", data2.value.toString())
 

@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "1089918384238",
-    "project_id": "farming-app-2fc2a",
-    "storage_bucket": "farming-app-2fc2a.appspot.com"
+    "project_number": "675657286417",
+    "project_id": "agri-india-c46d0",
+    "storage_bucket": "agri-india-c46d0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1089918384238:android:4c17926368f206dcd48e7f",
+        "mobilesdk_app_id": "1:675657286417:android:2bcb3f399a3e25202fc2b0",
         "android_client_info": {
           "package_name": "com.project.farmingapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1089918384238-fiogt24o945tpa23267nhvapi7jic8jj.apps.googleusercontent.com",
+          "client_id": "675657286417-35lu5dcmvomacp7gti7169a548lva0vi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.farmingapp",
+            "certificate_hash": "d61e54289b9fbf515d842a6ac730dfbda8ecd2af"
+          }
+        },
+        {
+          "client_id": "675657286417-0mefukhe10a9r6vjqe77ljhaaiiausqg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAm2wobnn3z6sp6QD5uMcmlQMm2MzXTLgE"
+          "current_key": "AIzaSyB4ZhtmtpLGAYLaLQRVt14hbjEnl_o2RNk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1089918384238-fiogt24o945tpa23267nhvapi7jic8jj.apps.googleusercontent.com",
+              "client_id": "675657286417-0mefukhe10a9r6vjqe77ljhaaiiausqg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
